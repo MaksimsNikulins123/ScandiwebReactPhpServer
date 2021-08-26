@@ -5,7 +5,7 @@
 */
 
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'id17429804_maxim');
-define('DB_PASS', 'MaksimNikulin123@');
-define('DB_NAME', 'id17429804_max');
+define('DB_HOST', 'us-cdbr-east-04.cleardb.com');
+define('DB_USER', 'b876d5c3605a6f');
+define('DB_PASS', '5f77b8aa');
+define('DB_NAME', 'heroku_af9c735e91181ba');
