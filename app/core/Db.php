@@ -37,38 +37,24 @@ class Db
         echo json_encode($products);
     }
 
-    public function set($name, $value){
-        if($value == ''){
-          $this->$name = 0;
-        }else{
-          $this->$name = $value;
-        }
-      }
-
-    public function get($name){
-        return $this->$name;
-      }
-
-    public function write($request)
+    public function write($sku, $name, $price, $type, $size, $weight, $height, $width, $length)
     {
-        
-        $arrayKeys = array_keys($request);
-        $arrayValues = array_values($request);
-        
-        for ($i=0; $i < count($request) ; $i++) { 
-            $this->set($arrayKeys[$i], $arrayValues[$i]);
-        }
 
-        for ($i=0; $i < count($request) ; $i++) { 
-              ${$arrayKeys[$i]} = $this->get($arrayKeys[$i]);
-            }
-    
             $connect = $this->connect();
-                
-            $sql = "INSERT INTO `products`(`id`, `sku`, `name`, `price`, `type`, `size`, `weight`, `height`, `width`, `length`) 
-                    VALUES (null,'$this->sku','$this->name','$this->price','$this->type','$this->size','$this->weight','$this->height','$this->width','$this->length')";
             
-            $result = $connect->query($sql);            
+            $sql = $connect->prepare ("INSERT INTO `products`(`id`, `sku`, `name`, `price`, `type`, `size`, `weight`, `height`, `width`, `length`) 
+                    VALUES (null, ? , ? , ? , ? , ? , ? , ? , ? , ? )");
+
+            $sql->bindParam(1, $sku);
+            $sql->bindParam(2, $name);
+            $sql->bindParam(3, $price);
+            $sql->bindParam(4, $type);
+            $sql->bindParam(5, $size);
+            $sql->bindParam(6, $weight);
+            $sql->bindParam(7, $height);
+            $sql->bindParam(8, $width);
+            $sql->bindParam(9, $length);
+            $sql->execute();
           
     }
 
