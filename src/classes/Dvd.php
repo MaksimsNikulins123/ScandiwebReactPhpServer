@@ -3,12 +3,40 @@
 namespace liw\src\classes;
 
 use liw\src\abstractClass\Product;
+use liw\app\core\Db;
 
 class Dvd extends Product
 {
-
+    private $type;
     private $size;
 
+    public function __construct($request)
+    {
+        $this->setSku($request["sku"]);
+        $this->setName($request["name"]);
+        $this->setPrice($request["price"]);
+        $this->setType($request["type"]);
+        $this->setSize($request["size"]);
+        $this->setWeight($request["weight"]);
+        $this->setHeight($request["height"]);
+        $this->setWidth($request["width"]);
+        $this->setLength($request["length"]);
+
+        $db = new Db();
+        
+        $db->write(
+            $this->getSku(), 
+            $this->getName(), 
+            $this->getPrice(), 
+            $this->getType(),
+            $this->getSize(),
+            $this->getWeight(),
+            $this->getHeight(),
+            $this->getWidth(),
+            $this->getLength()
+        );
+    }
+    
     public function getSku()
     {
         return $this->sku;
@@ -17,7 +45,7 @@ class Dvd extends Product
     {
         if(strlen($sku) > 0){
             $this->sku = $sku;
-            return "id has been updated to $sku";
+            return "sku has been updated to $sku";
         }else{
             return 'not a valid sku';
         }
@@ -30,7 +58,7 @@ class Dvd extends Product
     {
         if(strlen($name) > 0){
             $this->name = $name;
-            return "id has been updated to $name";
+            return "name has been updated to $name";
         }else{
             return 'not a valid name';
         }
@@ -43,7 +71,7 @@ class Dvd extends Product
     {
         if(is_string($price) && strlen($price) > 0){
             $this->price = $price;
-            return "id has been updated to $price";
+            return "price has been updated to $price";
         }else{
             return 'not a valid price';
         }
@@ -56,7 +84,7 @@ class Dvd extends Product
     {
         if(is_string($type) && $type == "DVD"){
             $this->type = $type;
-            return "id has been updated to $type";
+            return "type has been updated to $type";
         }else{
             return 'not a valid price';
         }
@@ -69,9 +97,61 @@ class Dvd extends Product
     {
         if(is_string($size) && strlen($size) > 0){
             $this->size = $size;
-            return "id has been updated to $size";
+            return "size has been updated to $size";
         }else{
             return 'not a valid size';
+        }
+    }
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+    public function setWeight($weight)
+    {
+        if(is_string($weight) && strlen($weight) > 0){
+            $this->weight = $weight;
+            return "weight has been updated to $weight";
+        }else{
+            return 'not a valid weight';
+        }
+    }
+    public function getHeight()
+    {
+        return $this->height;
+    }
+    public function setHeight($height)
+    {
+        if(is_string($height) && strlen($height) > 0){
+            $this->height = $height;
+            return "height has been updated to $height";
+        }else{
+            return 'not a valid height';
+        }
+    }
+    public function getWidth()
+    {
+        return $this->width;
+    }
+    public function setWidth($width)
+    {
+        if(is_string($width) && strlen($width) > 0){
+            $this->width = $width;
+            return "width has been updated to $width";
+        }else{
+            return 'not a valid width';
+        }
+    }
+    public function getLength()
+    {
+        return $this->length;
+    }
+    public function setLength($length)
+    {
+        if(is_string($length) && strlen($length) > 0){
+            $this->length = $length;
+            return "length has been updated to $length";
+        }else{
+            return 'not a valid length';
         }
     }
 }
